@@ -1,9 +1,7 @@
 import importlib
 import pkgutil
 
-
 class PluginLoader:
-
     def __init__(self, tools_package="tools"):
         self.tools_package = tools_package
         self.plugins = []
@@ -19,7 +17,6 @@ class PluginLoader:
             package.__path__,
             package.__name__ + "."
         ):
-
             module = importlib.import_module(module_name)
 
             # valida plugin
@@ -47,7 +44,6 @@ class PluginLoader:
         categories = {}
 
         for plugin in self.plugins:
-
             category = plugin["category"]
 
             if category not in categories:

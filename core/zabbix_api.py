@@ -1,10 +1,7 @@
 import requests
 
-
 class ZabbixAPI:
-
     def __init__(self, url, username, password):
-
         self.url = url.rstrip("/") + "/api_jsonrpc.php"
         self.username = username
         self.password = password
@@ -14,7 +11,6 @@ class ZabbixAPI:
 
 
     def login(self):
-
         result = self.call(
             "user.login",
             {
@@ -26,9 +22,7 @@ class ZabbixAPI:
 
         self.auth = result
 
-
     def call(self, method, params=None, auth=True):
-
         self.id += 1
 
         payload = {

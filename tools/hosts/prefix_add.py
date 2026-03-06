@@ -12,9 +12,7 @@ TOOL = {
     "dangerous": False
 }
 
-
 def collect_inputs():
-
     group = inquirer.text(
         message="Hostgroup name:"
     ).execute()
@@ -28,9 +26,7 @@ def collect_inputs():
         "prefix": prefix
     }
 
-
 def run(env, inputs):
-
     console.print(f"[bold yellow]Environment:[/bold yellow] {env['name']}")
 
     group = inputs["group"]
@@ -78,9 +74,7 @@ def run(env, inputs):
     lines.append("-" * 60)
     lines.append("")
 
-
     for i, host in enumerate(hosts, start=1):
-
         old_name = host["host"]
         new_name = f"{prefix}{old_name}"
 
@@ -117,7 +111,6 @@ def run(env, inputs):
         )
 
         for host in hosts:
-
             new_name = f"{prefix}{host['host']}"
 
             zapi.call(

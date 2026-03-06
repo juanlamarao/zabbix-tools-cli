@@ -11,24 +11,6 @@ from core.plugin_loader import PluginLoader
 
 console = Console()
 
-
-# def select_profile():
-#     """Lista arquivos em config/profiles e pede seleção."""
-#     profiles_dir = "config/profiles"
-#     profiles = [
-#         f.replace(".yaml", "")
-#         for f in os.listdir(profiles_dir)
-#         if f.endswith(".yaml")
-#     ]
-#     if not profiles:
-#         raise SystemExit("Nenhum profile encontrado em config/profiles")
-
-#     profile = inquirer.select(
-#         message="Select environment",
-#         choices=sorted(profiles)
-#     ).execute()
-
-#     return profile
 def select_profiles():
     """Lista arquivos em config/profiles e permite selecionar múltiplos"""
 
@@ -53,16 +35,7 @@ def select_profiles():
 
     return selected
 
-
-# def show_header():
-#     """Mostra header com nome do ambiente e cor por profile."""
-#     name = Context.config.get("name", "unknown").upper()
-#     # cores simples por ambiente
-#     color = "red" if name == "PROD" else ("yellow" if name == "STAGE" else "cyan")
-#     header = Text.assemble(("Zabbix Toolbox", "bold white"), ("  "), (f"ENV: {name}", color))
-#     console.rule(header)
 def show_header():
-
     env_names = [env["name"].upper() for env in Context.environments]
 
     env_text = ", ".join(env_names)
@@ -75,27 +48,8 @@ def show_header():
 
     console.rule(header)
 
-# def confirm_prod_action(plugin_meta):
-#     """
-#     Se o profile for PROD e plugin marcar 'dangerous': True, pede confirmação.
-#     Retorna True se ok para prosseguir.
-#     """
-#     name = Context.config.get("name", "").upper()
-#     if name == "PROD" and plugin_meta.get("dangerous", False):
-#         console.print("[bold red]⚠ Atenção: operação perigosa em PROD[/bold red]")
-#         console.print(f"Tool: [bold]{plugin_meta.get('name')}[/bold]")
-#         console.print(plugin_meta.get("description", ""))
-#         ok = inquirer.confirm(message="Continuar? (only if you are sure)", default=False).execute()
-#         return ok
-#     return True
-
-
 def main():
     # 1) Seleciona profile e carrega config
-    # profile = select_profile()
-    # loader = ConfigLoader(profile)
-    # Context.config = loader.get()
-    # console.print(f"Loaded profile: [bold]{profile}[/bold]\n")
     profiles = select_profiles()
     Context.environments = []
 
@@ -174,8 +128,7 @@ def main():
         except Exception as e:
             console.print(f"[red]Erro ao executar a tool:[/red] {e}")
 
-        # opcional: pausa/enter para voltar ao menu
-        input("\nPress Enter to continuar...")
+        input("\nPress Enter to continue...")
 
 if __name__ == "__main__":
     main()

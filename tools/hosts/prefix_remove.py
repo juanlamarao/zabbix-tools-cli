@@ -12,7 +12,6 @@ TOOL = {
     "dangerous": False
 }
 
-
 def collect_inputs():
 
     group = inquirer.text(
@@ -28,9 +27,7 @@ def collect_inputs():
         "prefix": prefix
     }
 
-
 def run(env, inputs):
-
     console.print(f"[bold yellow]Environment:[/bold yellow] {env['name']}")
 
     group = inputs["group"]
@@ -72,7 +69,6 @@ def run(env, inputs):
     affected_hosts = []
 
     for host in hosts:
-
         old_name = host["host"]
 
         if old_name.startswith(prefix):
@@ -93,15 +89,11 @@ def run(env, inputs):
     lines = []
 
     total = len(hosts)
-    # lines.append(f"\nHosts in selected group: {group}")
     lines.append(f"\nHosts in selected group: {group} ({total})")
     lines.append("-" * 60)
     lines.append("")
 
-    # for host in affected_hosts:
-
     for i, host in enumerate(hosts, start=1):
-        
         lines.append(
             f"[dim][{i}/{total}][/dim] [red]{old_name}[/red] -> [green]{new_name}[/green]"
         )
